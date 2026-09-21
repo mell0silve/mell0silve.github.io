@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="教学质量评价系统 - 专业构建数字化教学评价与反馈平台，支持多维评分、实时数据分析与教学质量可视化报告，助力教育机构实现科学化教学管理。">
+    <meta name="keywords" content="教学质量评价系统,教学评价,教育管理,在线评教,教学督导">
+    <title>教学质量评价系统 - 智能教学评估与反馈管理平台</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary-color: #64748b;
+            --accent-color: #0ea5e9;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Utility */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 24px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            font-size: 18px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--text-main);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-main);
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 15px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            line-height: 1.2;
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+
+        .hero-text h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 32px;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .stat-item h3 {
+            font-size: 28px;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .stat-item p {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        /* Features */
+        .features {
+            padding: 80px 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background-color: #eff6ff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: var(--primary-color);
+        }
+
+        .icon-box svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 15px;
+        }
+
+        /* Workflow */
+        .workflow {
+            background-color: #f1f5f9;
+            padding: 80px 0;
+        }
+
+        .step-container {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 50px;
+        }
+
+        .step-container::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--border-color);
+            z-index: 0;
+        }
+
+        .step-item {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            flex: 1;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--card-bg);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+            box-shadow: 0 0 0 8px var(--card-bg);
+        }
+
+        .step-item h3 {
+            margin-bottom: 10px;
+        }
+
+        .step-item p {
+            color: var(--text-light);
+            font-size: 14px;
+            padding: 0 10px;
+        }
+
+        /* Dashboard Preview */
+        .dashboard-preview {
+            padding: 80px 0;
+        }
+
+        .preview-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .sidebar {
+            background-color: #f8fafc;
+            padding: 20px;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .sidebar-menu li {
+            padding: 12px 15px;
+            margin-bottom: 5px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .sidebar-menu li.active, .sidebar-menu li:hover {
+            background-color: #eff6ff;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .main-view {
+            padding: 30px;
+        }
+
+        .view-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th, .data-table td {
+            text-align: left;
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .data-table th {
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .data-table td {
+            font-size: 14px;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-pending { background-color: #fef3c7; color: #d97706; }
+        .status-completed { background-color: #d1fae5; color: #059669; }
+
+        /* FAQ */
+        .faq {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 10px;
+        }
+
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 20px 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 24px;
+            color: var(--primary-color);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            color: var(--text-light);
+            font-size: 15px;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        /* CTA */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-white {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        .btn-white:hover {
+            background-color: #f1f5f9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #1e293b;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text p {
+                margin: 0 auto 30px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .stats-row {
+                justify-content: center;
+            }
+
+            .nav-container nav, .nav-cta {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .preview-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10v6"/><path d="M20 16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/><path d="M12 18v-6"/><path d="M12 12h.01"/></svg>
+                <span>EduScore</span> 评价系统
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#features">功能特点</a></li>
+                    <li><a href="#workflow">实施流程</a></li>
+                    <li><a href="#dashboard">数据看板</a></li>
+                    <li><a href="#faq">常见问题</a></li>
+                </ul>
+            </nav>
+            <div class="nav-cta">
+                <a href="#" class="btn btn-outline">登录系统</a>
+                <a href="#" class="btn btn-primary">免费试用</a>
+            </div>
+            <div class="mobile-menu-btn">☰</div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <h1>科学量化 <span>教学质量评价</span>，驱动教育质量持续提升</h1>
+                    <p>专为高校及教育机构打造的一站式教学质量评价解决方案。通过多维评分体系、实时数据采集与可视化分析，帮助管理者精准掌握教学动态，优化教学资源配置。</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary">立即体验系统</a>
+                        <a href="#" class="btn btn-outline">查看演示案例</a>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <h3>98%</h3>
+                            <p>评价完成率</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>0.3s</h3>
+                            <p>数据采集响应</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>50+</h3>
+                            <p>评价维度模型</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://picsum.photos/seed/edu_tech/600/400" alt="教学质量评价系统界面示意图" width="600" height="400">
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-title">
+                    <h2>全方位评价功能模块</h2>
+                    <p>覆盖课前、课中、课后全流程，构建闭环教学质量管理体系</p>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        </div>
+                        <h3>多维评价体系</h3>
+                        <p>支持教学态度、教学内容、教学方法、教学效果等多维度量化打分，满足不同学科、不同层级的教学评价需求。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                        </div>
+                        <h3>在线便捷评教</h3>
+                        <p>学生/教师通过移动端或PC端随时随地参与评价，支持匿名评价与实名评价切换，保护隐私同时保证反馈真实性。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                        </div>
+                        <h3>智能数据统计</h3>
+                        <p>自动生成各类统计报表，包括课程满意度分析、教师排名、班级对比等，数据可视化大屏直观展示评价结果。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </div>
+                        <h3>即时反馈机制</h3>
+                        <p>评价结果实时汇总，教师可第一时间收到教学反馈与改进建议，形成“评价-反馈-改进”的良性教学循环。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        </div>
+                        <h3>安全隐私保护</h3>
+                        <p>采用企业级加密技术保障数据安全，严格权限管理，确保评价过程公平公正，杜绝数据泄露风险。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </div>
+                        <h3>灵活配置设置</h3>
+                        <p>支持自定义评价量表、权重分配及评价周期，系统自动适配不同院系、专业的特殊评价规则。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workflow Section -->
+        <section id="workflow" class="workflow">
+            <div class="container">
+                <div class="section-title">
+                    <h2>简单高效的实施流程</h2>
+                    <p>从需求调研到上线运行，我们提供全流程技术支持</p>
+                </div>
+                <div class="step-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h3>需求调研</h3>
+                        <p>深入了解学校评价标准与业务流程</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h3>方案定制</h3>
+                        <p>搭建专属评价模型与指标体系</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h3>系统部署</h3>
+                        <p>私有化部署或云端SaaS服务开通</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <h3>培训上线</h3>
+                        <p>操作培训与正式评价周期启动</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Preview -->
+        <section id="dashboard" class="dashboard-preview">
+            <div class="container">
+                <div class="section-title">
+                    <h2>数据可视化看板</h2>
+                    <p>直观呈现教学质量全景，辅助科学决策</p>
+                </div>
+                <div class="preview-layout">
+                    <div class="sidebar">
+                        <ul class="sidebar-menu">
+                            <li class="active">综合概览</li>
+                            <li>教师评价详情</li>
+                            <li>课程质量分析</li>
+                            <li>学生反馈汇总</li>
+                            <li>督导检查记录</li>
+                        </ul>
+                    </div>
+                    <div class="main-view">
+                        <div class="view-header">
+                            <h3>2023-2024学年 第一学期 教学质量概览</h3>
+                            <select style="padding: 6px; border-radius: 4px; border: 1px solid #ccc;">
+                                <option>第一学期</option>
+                                <option>第二学期</option>
+                            </select>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>教师姓名</th>
+                                    <th>所属院系</th>
+                                    <th>平均评分</th>
+                                    <th>评价人数</th>
+                                    <th>主要优势</th>
+                                    <th>改进建议</th>
+                                    <th>状态</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>张伟</td>
+                                    <td>计算机学院</td>
+                                    <td>4.8</td>
+                                    <td>128</td>
+                                    <td>教学严谨</td>
+                                    <td>增加互动环节</td>
+                                    <td><span class="status-badge status-completed">已完成</span></td>
+                                </tr>
+                                <tr>
+                                    <td>李娜</td>
+                                    <td>外国语学院</td>
+                                    <td>4.6</td>
+                                    <td>95</td>
+                                    <td>语言生动</td>
+                                    <td>课件更新需及时</td>
+                                    <td><span class="status-badge status-completed">已完成</span></td>
+                                </tr>
+                                <tr>
+                                    <td>王强</td>
+                                    <td>土木工程学院</td>
+                                    <td>4.2</td>
+                                    <td>110</td>
+                                    <td>专业知识扎实</td>
+                                    <td>课堂节奏偏快</td>
+                                    <td><span class="status-badge status-pending">进行中</span></td>
+                                </tr>
+                                <tr>
+                                    <td>刘敏</td>
+                                    <td>商学院</td>
+                                    <td>4.9</td>
+                                    <td>150</td>
+                                    <td>案例丰富</td>
+                                    <td>无</td>
+                                    <td><span class="status-badge status-completed">已完成</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq">
+            <div class="container">
+                <div class="section-title">
+                    <h2>常见问题解答</h2>
+                    <p>关于教学质量评价系统的使用与设置</p>
+                </div>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <button class="faq-question">评价结果是否支持匿名？</button>
+                        <div class="faq-answer">
+                            <p>系统支持匿名评价模式，系统会自动对评价内容进行加密处理，确保评价人的隐私不被泄露，同时也保障评价结果的客观公正性。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">系统是否支持私有化部署？</button>
+                        <div>
+                            <div class="faq-answer">
+                                <p>是的，我们提供私有化部署方案，数据完全存储在贵校的服务器内，满足对数据安全有极高要求的机构需求。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">评价周期如何设置？</button>
+                        <div>
+                            <div class="faq-answer">
+                                <p>管理员可以根据教学日历灵活设置评价开始和结束时间。系统支持学期制评价、月度评价或专项评价等多种周期模式。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">如何处理恶意评价或异常数据？</button>
+                        <div>
+                            <div class="faq-answer">
+                                <p>系统内置了智能反作弊算法，能够自动识别异常提交行为。管理员后台可以手动审核或删除违规评价记录，确保数据质量。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>开启智能化教学评价新篇章</h2>
+                <p>立即联系我们，获取专属的数字化教学管理解决方案演示</p>
+                <a href="#" class="btn btn-white">预约免费演示</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>EduScore 评价系统</h3>
+                    <p>致力于为教育机构提供最专业的教学质量评价与管理工具，助力教育现代化建设。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>产品功能</h4>
+                    <ul>
+                        <li><a href="#">在线评教</a></li>
+                        <li><a href="#">督导管理</a></li>
+                        <li><a href="#">质量报告</a></li>
+                        <li><a href="#">数据大屏</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>解决方案</h4>
+                    <ul>
+                        <li><a href="#">高校方案</a></li>
+                        <li><a href="#">中职方案</a></li>
+                        <li><a href="#">培训机构</a></li>
+                        <li><a href="#">企业内训</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>联系我们</h4>
+                    <ul>
+                        <li>电话: 400-123-4567</li>
+                        <li>邮箱: support@eduscore.com</li>
+                        <li>地址: 科技园区创新大道88号</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 EduScore Technology Co., Ltd. All Rights Reserved. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion Logic
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                // Toggle current item
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Mobile Menu Logic
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const nav = document.querySelector('nav');
+        const navUl = document.querySelector('nav ul');
+        const navCta = document.querySelector('.nav-cta');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isHidden = window.getComputedStyle(navUl).display === 'none';
+            if (isHidden) {
+                navUl.style.display = 'flex';
+                navUl.style.flexDirection = 'column';
+                navUl.style.position = 'absolute';
+                navUl.style.top = '70px';
+                navUl.style.left = '0';
+                navUl.style.width = '100%';
+                navUl.style.background = 'white';
+                navUl.style.padding = '20px';
+                navUl.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                
+                navCta.style.display = 'flex';
+                navCta.style.flexDirection = 'column';
+                navCta.style.position = 'absolute';
+                navCta.style.top = '260px';
+                navCta.style.left = '0';
+                navCta.style.width = '100%';
+                navCta.style.padding = '0 20px 20px';
+            } else {
+                navUl.style.display = '';
+                navCta.style.display = '';
+            }
+        });
+    </script>
+</body>
+  </html>
