@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="韩忠学官方网站，提供韩忠学教授的个人简介、学术成果、教学理念及最新研究动态。了解其在相关领域的专业贡献与教育理念。">
+    <meta name="keywords" content="韩忠学, 教授, 学者, 学术研究, 教育理念, 个人主页">
+    <title>韩忠学-学者简介与学术成果展示平台</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--white);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Layout Utilities */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .cta-button {
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .cta-button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            color: var(--white);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--white);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Profile Section */
+        .profile-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .profile-card {
+            background: var(--light-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            background-color: #ddd;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #777;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .profile-info .degree {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .contact-list {
+            text-align: left;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .contact-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Research Areas */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid #eee;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+            border-color: transparent;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 1.25rem;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Publications */
+        .pub-item {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+
+        .pub-year {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 5px;
+        }
+
+        .pub-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .pub-journal {
+            color: var(--accent-color);
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        /* News Section */
+        .news-item {
+            display: flex;
+            gap: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+
+        .news-date {
+            background-color: var(--light-bg);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 70px;
+        }
+
+        .news-date .day {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            line-height: 1;
+        }
+
+        .news-date .month {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .news-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .news-content p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #bdc3c7;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #95a5a6;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .profile-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none; /* Simplified for static demo */
+            }
+
+            .section {
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <span>韩</span>忠学
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#profile">个人简介</a></li>
+                    <li><a href="#research">研究方向</a></li>
+                    <li><a href="#publications">学术成果</a></li>
+                    <li><a href="#news">最新动态</a></li>
+                </ul>
+                <a href="#contact" class="cta-button">联系我</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>探索学术前沿<br>致力于知识创新与传播</h1>
+                <p>欢迎访问韩忠学教授的个人学术主页。这里汇集了我在相关领域的最新研究成果、教学理念以及学术动态分享。</p>
+                <div class="hero-buttons">
+                    <a href="#publications" class="btn btn-primary">浏览论文</a>
+                    <a href="#contact" class="btn btn-outline">预约咨询</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profile" class="section">
+            <div class="container">
+                <div class="profile-content">
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <!-- Placeholder for avatar -->
+                            <img src="https://picsum.photos/seed/hanzhongxue/200/200" alt="韩忠学教授头像">
+                        </div>
+                        <h3>韩忠学</h3>
+                        <span class="degree">教授 / 博士生导师</span>
+                        <p style="margin-top: 15px; color: #555;">专注于领域研究与应用实践，致力于推动行业技术进步。</p>
+                    </div>
+                    <div class="profile-info">
+                        <h2>关于我</h2>
+                        <p style="margin-top: 15px; color: #555;">
+                            韩忠学教授拥有超过20年的学术研究经验，在业内享有较高的声誉。他长期致力于[具体研究领域，如：人工智能算法、现代教育理论、传统工艺保护等]的研究，并在国内外权威期刊发表多篇高水平论文。
+                        </p>
+                        <p style="margin-top: 15px; color: #555;">
+                            韩教授不仅注重理论深度，更强调学术成果的实际应用价值。他指导的众多学生在各类竞赛中屡获佳绩，并活跃于各大科研机构与企业研发部门。
+                        </p>
+                        <ul class="contact-list">
+                            <li><strong>邮箱：</strong> han@university.edu.cn</li>
+                            <li><strong>办公地点：</strong> 理科楼 A座 302</li>
+                            <li><strong>研究方向：</strong> [领域A]、[领域B]、[领域C]</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Areas -->
+        <section id="research" class="section" style="background-color: var(--light-bg);">
+            <div class="container">
+                <h2 class="section-title">主要研究方向</h2>
+                <p class="section-subtitle">聚焦核心领域，探索未知边界，解决实际问题。</p>
+                
+                <div class="grid-3">
+                    <article class="card">
+                        <div class="card-icon">01</div>
+                        <h3>核心领域一</h3>
+                        <p>深入探讨该领域的理论基础与模型构建，分析当前技术瓶颈，提出创新性的解决方案。关注该方向的长期发展趋势与跨学科融合。</p>
+                    </article>
+                    <article class="card">
+                        <div class="card-icon">02</div>
+                        <h3>应用与转化</h3>
+                        <p>将理论研究转化为实际应用技术，推动科研成果在行业内的落地与推广。通过实验验证与案例分析，确保技术的可行性与稳定性。</p>
+                    </article>
+                    <article class="card">
+                        <div class="card-icon">03</div>
+                        <h3>人才培养</h3>
+                        <p>制定系统的教学计划，培养具备扎实理论基础和较强实践能力的创新型人才。通过科研项目指导，提升学生的科研素养与解决问题的能力。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications -->
+        <section id="publications" class="section">
+            <div class="container">
+                <h2 class="section-title">学术成果</h2>
+                <p class="section-subtitle">精选近年发表的核心论文与著作。</p>
+
+                <div class="grid-3" style="grid-template-columns: 2fr 1fr;">
+                    <div class="publications-list">
+                        <article class="pub-item">
+                            <div class="pub-year">2023</div>
+                            <div class="pub-title">基于深度学习的复杂系统分析方法研究</div>
+                            <div class="pub-journal">《计算机科学》期刊, 第50卷, 第4期</div>
+                        </article>
+                        <article class="pub-item">
+                            <div class="pub-year">2022</div>
+                            <div class="pub-title">现代教育技术在传统教学中的应用探索</div>
+                            <div class="pub-journal">《高等教育研究》期刊, 第39卷, 第2期</div>
+                        </article>
+                        <article class="pub-item">
+                            <div class="pub-year">2021</div>
+                            <div class="pub-title">跨文化背景下的信息传播策略分析</div>
+                            <div class="pub-journal">《新闻与传播评论》期刊, 第74卷, 第6期</div>
+                        </article>
+                        <article class="pub-item">
+                            <div class="pub-year">2020</div>
+                            <div class="pub-title">关于行业标准化建设的若干思考</div>
+                            <div class="pub-journal">《标准化研究》期刊, 第12卷, 第3期</div>
+                        </article>
+                    </div>
+                    <aside class="card">
+                        <h3>学术兼职</h3>
+                        <ul style="margin-top: 15px; color: #555;">
+                            <li style="margin-bottom: 10px;">[某学术协会] 理事</li>
+                            <li style="margin-bottom: 10px;">[某期刊] 编委</li>
+                            <li style="margin-bottom: 10px;">[某项目] 专家顾问</li>
+                            <li style="margin-bottom: 10px;">[某评审委员会] 委员</li>
+                        </ul>
+                        <h3 style="margin-top: 30px;">引用统计</h3>
+                        <div style="margin-top: 15px; font-size: 2rem; font-weight: bold; color: var(--primary-color);">
+                            1,200+
+                        </div>
+                        <div style="color: #999; font-size: 0.9rem;">Google Scholar 指数</div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- News / Updates -->
+        <section id="news" class="section" style="background-color: var(--light-bg);">
+            <div class="container">
+                <h2 class="section-title">最新动态</h2>
+                <p class="section-subtitle">关注韩忠学教授的近期活动、讲座及课程安排。</p>
+
+                <div class="news-list">
+                    <div class="news-item">
+                        <div class="news-date">
+                            <span class="day">15</span>
+                            <span class="month">10月</span>
+                        </div>
+                        <div class="news-content">
+                            <h4>受邀在[某国际会议]作主题报告</h4>
+                            <p>将分享关于[具体议题]的最新研究成果与行业见解。</p>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">
+                            <span class="day">02</span>
+                            <span class="month">09月</span>
+                        </div>
+                        <div class="news-content">
+                            <h4>指导的学生团队获得省级竞赛一等奖</h4>
+                            <p>祝贺同学们在[竞赛名称]中表现优异，体现了扎实的专业功底。</p>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">
+                            <span class="day">20</span>
+                            <span class="month">08月</span>
+                        </div>
+                        <div class="news-content">
+                            <h4>出版新书《[书名]》正式发售</h4>
+                            <p>本书系统阐述了该领域的核心理论与应用案例，欢迎购阅。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact / Footer -->
+        <footer id="contact">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <h4>韩忠学教授</h4>
+                        <p style="color: #bdc3c7; font-size: 0.9rem; line-height: 1.8;">
+                            致力于学术研究，传承知识，启迪未来。欢迎通过下方方式联系。
+                        </p>
+                    </div>
+                    <div class="footer-col">
+                        <h4>快速链接</h4>
+                        <ul>
+                            <li><a href="#profile">个人简介</a></li>
+                            <li><a href="#research">研究方向</a></li>
+                            <li><a href="#publications">发表论文</a></li>
+                            <li><a href="#news">新闻动态</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>联系方式</h4>
+                        <ul>
+                            <li>电话：+86 123 4567 8900</li>
+                            <li>邮箱：han@university.edu.cn</li>
+                            <li>地址：[某省某市某区某路123号]</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 韩忠学学术主页. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+</body>
+</html>
