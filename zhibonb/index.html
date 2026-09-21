@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NBA直播免费观看平台，提供NBA常规赛、季后赛、总决赛高清直播，实时赛况更新，球员数据统计及赛前分析。支持PC、手机、平板多端同步观看，无需下载APP，流畅体验。">
+    <meta name="keywords" content="直播nba免费观看, NBA直播, NBA在线直播, NBA免费看球, NBA赛程, NBA比分">
+    <title>直播nba免费观看 - NBA赛事直播平台与赛程指南</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #0073e6;
+            --secondary-color: #00c6ff;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --accent: #f59e0b;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --radius: 8px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid #334155;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-md) var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-lg);
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            color: var(--text-sub);
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .live-badge {
+            background-color: #ef4444;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            animation: pulse 2s infinite;
+            margin-left: 5px;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), url('https://picsum.photos/seed/nbaarena/1920/600') center/cover no-repeat;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: var(--spacing-lg);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 119, 230, 0.4);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-lg);
+        }
+
+        /* Live Now Section */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            border-bottom: 1px solid #334155;
+            padding-bottom: var(--spacing-sm);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .live-now-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .match-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            border: 1px solid #334155;
+        }
+
+        .match-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-color);
+        }
+
+        .match-header {
+            padding: var(--spacing-md);
+            background-color: rgba(255, 255, 255, 0.03);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .match-status {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .match-status.live {
+            color: #ef4444;
+        }
+
+        .match-body {
+            padding: var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            width: 40%;
+        }
+
+        .team-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: 2px solid #334155;
+        }
+
+        .team-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .score-box {
+            text-align: center;
+        }
+
+        .score {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .match-footer {
+            padding: var(--spacing-md);
+            text-align: center;
+            border-top: 1px solid #334155;
+        }
+
+        .watch-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .watch-btn:hover {
+            background-color: #005bb5;
+        }
+
+        /* Schedule Section */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .schedule-item {
+            background-color: var(--card-bg);
+            padding: var(--spacing-md);
+            border-radius: var(--radius);
+            border: 1px solid #334155;
+            position: relative;
+        }
+
+        .schedule-date {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            margin-bottom: 8px;
+        }
+
+        .schedule-match {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .schedule-team {
+            font-weight: 600;
+        }
+
+        .schedule-time {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+        }
+
+        /* Features/Info */
+        .features-section {
+            background-color: #162032;
+            padding: var(--spacing-lg) 0;
+            margin-top: var(--spacing-lg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            text-align: center;
+        }
+
+        .feature-item h3 {
+            margin-bottom: var(--spacing-sm);
+            color: var(--secondary-color);
+        }
+
+        .feature-item p {
+            color: var(--text-sub);
+            font-size: 0.9rem;
+        }
+
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: var(--card-bg);
+            margin-bottom: var(--spacing-md);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: var(--spacing-md);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .faq-answer {
+            padding: 0 var(--spacing-md) var(--spacing-md);
+            color: var(--text-sub);
+            display: none;
+            border-top: 1px solid #334155;
+            padding-top: var(--spacing-md);
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0b1120;
+            padding: var(--spacing-lg) 0;
+            margin-top: var(--spacing-lg);
+            border-top: 1px solid #334155;
+            font-size: 0.9rem;
+            color: var(--text-sub);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .footer-col h4 {
+            color: var(--text-main);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .footer-col ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: var(--spacing-md);
+            border-top: 1px solid #1e293b;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+            .nav-links {
+                gap: var(--spacing-md);
+                font-size: 0.85rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .match-body {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+            .score-box {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <span>🏀</span> NBA直播中心
+            </a>
+            <nav class="nav-links">
+                <a href="#live" class="active">直播中</a>
+                <a href="#schedule">赛程表</a>
+                <a href="#ranking">球队排名</a>
+                <a href="#faq">常见问题</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>直播nba免费观看</h1>
+                <p>专业高清直播源，覆盖NBA常规赛、季后赛及总决赛。支持多端同步，随时随地畅享篮球盛宴。</p>
+                <a href="#live" class="cta-btn">立即观看直播</a>
+            </div>
+        </section>
+
+        <!-- Live Now Section -->
+        <section id="live" class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span style="color: #ef4444;">●</span> 正在直播
+                </h2>
+                <div style="font-size: 0.9rem; color: var(--text-sub);">
+                    实时更新 • 无需注册 • 高清流畅
+                </div>
+            </div>
+
+            <div class="live-now-grid">
+                <!-- Match Card 1 -->
+                <article class="match-card">
+                    <div class="match-header">
+                        <span class="match-status live">LIVE 直播中</span>
+                        <span style="font-size: 0.8rem; color: #94a3b8;">第三节 03:42</span>
+                    </div>
+                    <div class="match-body">
+                        <div class="team">
+                            <div class="team-logo">🦅</div>
+                            <span class="team-name">凯尔特人</span>
+                        </div>
+                        <div class="score-box">
+                            <div class="score">108 : 102</div>
+                            <div style="font-size: 0.8rem; color: var(--accent);">主场领先</div>
+                        </div>
+                        <div class="team">
+                            <div class="team-logo">🦁</div>
+                            <span class="team-name">湖人</span>
+                        </div>
+                    </div>
+                    <div class="match-footer">
+                        <a href="#" class="watch-btn">进入直播间 ▶</a>
+                    </div>
+                </article>
+
+                <!-- Match Card 2 -->
+                <article class="match-card">
+                    <div class="match-header">
+                        <span class="match-status live">LIVE 直播中</span>
+                        <span style="font-size: 0.8rem; color: #94a3b8;">第四节 05:15</span>
+                    </div>
+                    <div class="match-body">
+                        <div class="team">
+                            <div class="team-logo">⚡</div>
+                            <span class="team-name">勇士</span>
+                        </div>
+                        <div class="score-box">
+                            <div class="score">95 : 98</div>
+                            <div style="font-size: 0.8rem; color: var(--accent);">客队领先</div>
+                        </div>
+                        <div class="team">
+                            <div class="team-logo">🛡️</div>
+                            <span class="team-name">独行侠</span>
+                        </div>
+                    </div>
+                    <div class="match-footer">
+                        <a href="#" class="watch-btn">进入直播间 ▶</a>
+                    </div>
+                </article>
+
+                <!-- Match Card 3 -->
+                <article class="match-card">
+                    <div class="match-header">
+                        <span class="match-status">待开始</span>
+                        <span style="font-size: 0.8rem; color: #94a3b8;">明日 08:30</span>
+                    </div>
+                    <div class="match-body">
+                        <div class="team">
+                            <div class="team-logo">🧊</div>
+                            <span class="team-name">太阳</span>
+                        </div>
+                        <div class="score-box">
+                            <div class="score">-</div>
+                            <div style="font-size: 0.8rem; color: #94a3b8;">VS</div>
+                        </div>
+                        <div class="team">
+                            <div class="team-logo">🔥</div>
+                            <span class="team-name">热火</span>
+                        </div>
+                    </div>
+                    <div class="match-footer">
+                        <a href="#" class="watch-btn" style="background-color: #475569;">预约提醒</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Schedule Section -->
+        <section id="schedule" class="container">
+            <div class="section-header">
+                <h2 class="section-title">📅 近期赛程</h2>
+                <a href="#" style="color: var(--primary-color); font-size: 0.9rem;">查看完整赛程 ></a>
+            </div>
+
+            <div class="schedule-grid">
+                <div class="schedule-item">
+                    <div class="schedule-date">2023年10月25日 周四</div>
+                    <div class="schedule-match">
+                        <span class="schedule-team">76人</span>
+                        <span class="schedule-time">07:30</span>
+                        <span class="schedule-team">尼克斯</span>
+                    </div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-date">2023年10月25日 周四</div>
+                    <div class="schedule-match">
+                        <span class="schedule-team">快船</span>
+                        <span class="schedule-time">10:00</span>
+                        <span class="schedule-team">开拓者</span>
+                    </div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-date">2023年10月26日 周五</div>
+                    <div class="schedule-match">
+                        <span class="schedule-team">雄鹿</span>
+                        <span class="schedule-time">07:30</span>
+                        <span class="schedule-team">公牛</span>
+                    </div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-date">2023年10月26日 周五</div>
+                    <div class="schedule-match">
+                        <span class="schedule-team">湖人</span>
+                        <span class="schedule-time">10:30</span>
+                        <span class="schedule-team">爵士</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3>高清画质</h3>
+                        <p>支持1080P高清直播，还原现场视觉体验，细节清晰可见。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>多端同步</h3>
+                        <p>PC电脑、手机移动端、平板电脑均可无缝切换，不错过任何精彩瞬间。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>实时数据</h3>
+                        <p>结合专业数据统计，实时更新比分、球员效率值及投篮命中率。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="container">
+            <div class="section-header">
+                <h2 class="section-title">常见问题</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item active">
+                    <div class="faq-question">如何进行直播nba免费观看？</div>
+                    <div class="faq-answer">点击“进入直播间”按钮，选择您喜欢的播放源（如CCTV5、腾讯体育等），无需下载任何软件，直接在浏览器中即可观看。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">直播卡顿怎么办？</div>
+                    <div class="faq-answer">建议切换至标清或高清播放源，并检查您的网络连接。部分直播源在比赛高潮时段可能会比较拥挤。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">是否支持手机观看？</div>
+                    <div class="faq-answer">完全支持。本站提供响应式设计，您可以直接在手机浏览器中打开，享受流畅的移动端观看体验。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">免费观看会影响画质吗？</div>
+                    <div class="faq-answer">免费观看通常提供标清或高清画质，与付费会员服务在流畅度上差异不大，但高清源可能会根据服务器负载进行切换。</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>关于我们</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.6;">NBA直播中心致力于为广大篮球爱好者提供最新、最全的NBA赛事直播服务，让您足不出户即可畅享NBA精彩对决。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>热门频道</h4>
+                    <ul>
+                        <li><a href="#">NBA常规赛</a></li>
+                        <li><a href="#">NBA季后赛</a></li>
+                        <li><a href="#">NBA总决赛</a></li>
+                        <li><a href="#">全明星赛</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>帮助中心</h4>
+                    <ul>
+                        <li><a href="#">观看指南</a></li>
+                        <li><a href="#">赛程查询</a></li>
+                        <li><a href="#">版权声明</a></li>
+                        <li><a href="#">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 NBA直播中心. All Rights Reserved. 本站仅提供信息聚合与导航服务，所有直播源均来自第三方平台。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple FAQ Interaction
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+  </html>
