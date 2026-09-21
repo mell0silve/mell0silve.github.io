@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="51新炫舞官方门户，提供最新51新炫舞游戏资讯、版本更新公告、热门舞蹈攻略、角色养成指南及玩家社区互动服务。">
+    <meta name="keywords" content="51新炫舞,新炫舞,51游戏,舞蹈游戏,网页游戏,炫舞攻略">
+    <title>51新炫舞-最新舞蹈游戏资讯与攻略指南</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #ff0055;
+            --secondary-color: #00d2ff;
+            --accent-color: #ffd700;
+            --bg-dark: #0f0f1a;
+            --bg-card: #1a1a2e;
+            --text-main: #ffffff;
+            --text-muted: #a0a0b0;
+            --nav-height: 70px;
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), #ff5e62);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 0, 85, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 0, 85, 0.6);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary-color);
+            color: var(--bg-dark);
+        }
+
+        /* Header */
+        header {
+            height: var(--nav-height);
+            background: rgba(15, 15, 26, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-muted);
+            position: relative;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--text-main);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .login-btn {
+            color: var(--text-main);
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: var(--nav-height);
+            height: 600px;
+            background: linear-gradient(to bottom, rgba(15, 15, 26, 0.3), var(--bg-dark)),
+                        url('https://picsum.photos/seed/dancehero/1920/1080') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, var(--bg-dark) 90%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: rgba(255, 0, 85, 0.2);
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 0, 85, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        /* Features Grid */
+        .features {
+            padding: 60px 0;
+            background: var(--bg-dark);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s, background 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: #252542;
+            border-color: var(--secondary-color);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* News & Updates Section */
+        .news-section {
+            padding: 80px 0;
+            background: #161625;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .news-main {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .news-card {
+            display: flex;
+            background: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .news-card:hover {
+            transform: scale(1.01);
+        }
+
+        .news-img {
+            width: 280px;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .news-tag {
+            color: var(--secondary-color);
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .news-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .news-content p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .news-list {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .news-list h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 10px;
+        }
+
+        .news-list-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .news-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-list-item a {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .news-list-item a:hover {
+            color: var(--primary-color);
+        }
+
+        .news-date {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Guide Section */
+        .guide-section {
+            padding: 80px 0;
+            background: var(--bg-dark);
+        }
+
+        .guide-wrapper {
+            display: flex;
+            gap: 40px;
+        }
+
+        .guide-sidebar {
+            width: 300px;
+            flex-shrink: 0;
+        }
+
+        .guide-list {
+            background: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .guide-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .guide-item:last-child {
+            border-bottom: none;
+        }
+
+        .guide-item:hover, .guide-item.active {
+            background: rgba(0, 210, 255, 0.1);
+            color: var(--secondary-color);
+        }
+
+        .guide-main {
+            flex: 1;
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 40px;
+            min-height: 400px;
+        }
+
+        .guide-article h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .guide-article h4 {
+            font-size: 18px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .guide-article p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .guide-article ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .guide-article li {
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        /* Footer */
+        footer {
+            background: #0b0b16;
+            padding: 60px 0 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 15px;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #666;
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            .guide-wrapper {
+                flex-direction: column;
+            }
+            .guide-sidebar {
+                width: 100%;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none; /* Simplified for mobile, ideally a hamburger menu */
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+            .news-card {
+                flex-direction: column;
+            }
+            .news-img {
+                width: 100%;
+                height: 200px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">51新炫舞</a>
+            <nav class="nav-menu">
+                <a href="#" class="active">首页</a>
+                <a href="#">游戏资讯</a>
+                <a href="#">舞蹈攻略</a>
+                <a href="#">角色图鉴</a>
+                <a href="#">玩家社区</a>
+            </nav>
+            <div class="user-actions">
+                <a href="#" class="login-btn">登录</a>
+                <a href="#" class="btn btn-primary" style="padding: 8px 20px; font-size: 14px;">立即注册</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content">
+                <span class="hero-tag">全新版本 · 全新舞步</span>
+                <h1>释放你的律动，<br>掌控舞台中央</h1>
+                <p>51新炫舞带来最纯粹的街机舞蹈体验。数千套精美服装、实时互动PK、全明星嘉宾助阵，让每一次点击都成为艺术的绽放。</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary">开始跳舞</a>
+                    <a href="#" class="btn btn-outline" style="margin-left: 10px;">观看宣传片</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <div class="section-title">
+                    <h2>游戏特色</h2>
+                    <p>不仅仅是游戏，更是一场视觉与听觉的盛宴</p>
+                </div>
+                <div class="feature-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon">💃</div>
+                        <h3>海量舞曲库</h3>
+                        <p>收录国内外热门流行、电子、摇滚等上百种风格音乐，满足不同玩家口味。</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">👗</div>
+                        <h3>换装系统</h3>
+                        <p>定制专属时尚造型，从街头潮牌到华丽礼服，打造独一无二的舞台偶像。</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">⚔️</div>
+                        <h3>竞技PK</h3>
+                        <p>实时匹配对手，比拼连击数与完美度，在排行榜上争夺最强舞王称号。</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">👯</div>
+                        <h3>社交互动</h3>
+                        <p>组建舞团，参加大型派对，与好友在线互动，分享游戏精彩瞬间。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section class="news-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>最新动态</h2>
+                    <p>掌握51新炫舞一手资讯</p>
+                </div>
+                <div class="news-grid">
+                    <div class="news-main">
+                        <article class="news-card">
+                            <img src="https://picsum.photos/seed/dance1/600/400" alt="新版本封面" class="news-img">
+                            <div class="news-content">
+                                <div>
+                                    <span class="news-tag">版本更新</span>
+                                    <h3>【V2.5】霓虹之夜版本全攻略：新角色与限时活动详解</h3>
+                                    <p>51新炫舞V2.5版本震撼上线，全新“霓虹之夜”主题地图开放，神秘舞者“星夜”加入阵营，更有海量限定服装等你来换...</p>
+                                </div>
+                                <div class="news-meta">
+                                    <span>2023-10-24</span>
+                                    <a href="#">阅读更多 &rarr;</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="news-card">
+                            <img src="https://picsum.photos/seed/dance2/600/400" alt="比赛现场" class="news-img">
+                            <div class="news-content">
+                                <div>
+                                    <span class="news-tag">赛事公告</span>
+                                    <h3>2023秋季全国炫舞争霸赛总决赛日程公布</h3>
+                                    <p>历经三个月的激烈角逐，全国32强选手即将汇聚魔都。本次决赛将采用VR直播技术，带来前所未有的观赛体验...</p>
+                                </div>
+                                <div class="news-meta">
+                                    <span>2023-10-22</span>
+                                    <a href="#">阅读更多 &rarr;</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="news-card">
+                            <img src="https://picsum.photos/seed/dance3/600/400" alt="活动预告" class="news-img">
+                            <div class="news-content">
+                                <div>
+                                    <span class="news-tag">活动预告</span>
+                                    <h3>国庆狂欢活动开启：登录即送限定舞鞋</h3>
+                                    <p>为庆祝国庆佳节，51新炫舞特别推出“盛世华诞”活动。活动期间每日登录游戏，累计登录7天可领取限定舞鞋“红旗飘飘”...</p>
+                                </div>
+                                <div class="news-meta">
+                                    <span>2023-10-20</span>
+                                    <a href="#">阅读更多 &rarr;</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <aside class="news-sidebar">
+                        <div class="news-list">
+                            <h3>热门榜单</h3>
+                            <div class="news-list-item">
+                                <a href="#">S级连击教学视频</a>
+                                <span class="news-date">10-21</span>
+                            </div>
+                            <div class="news-list-item">
+                                <a href="#">2023秋季赛报名入口</a>
+                                <span class="news-date">10-20</span>
+                            </div>
+                            <div class="news-list-item">
+                                <a href="#">全服时装折扣活动</a>
+                                <span class="news-date">10-19</span>
+                            </div>
+                            <div class="news-list-item">
+                                <a href="#">新地图“深海迷航”测评</a>
+                                <span class="news-date">10-18</span>
+                            </div>
+                            <div class="news-list-item">
+                                <a href="#">舞团系统优化公告</a>
+                                <span class="news-date">10-17</span>
+                            </div>
+                            <div class="news-list-item">
+                                <a href="#">职业选手专访：李小龙</a>
+                                <span class="news-date">10-16</span>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guide Section -->
+        <section class="guide-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>新手指南</h2>
+                    <p>从入门到精通的必备知识</p>
+                </div>
+                <div class="guide-wrapper">
+                    <aside class="guide-sidebar">
+                        <div class="guide-list">
+                            <div class="guide-item active">快速入门</div>
+                            <div class="guide-item">基础操作详解</div>
+                            <div class="guide-item">连击技巧</div>
+                            <div class="guide-item">装备选择建议</div>
+                            <div class="guide-item">常见问题FAQ</div>
+                        </div>
+                    </aside>
+                    <article class="guide-main">
+                        <div class="guide-article">
+                            <h2>新手快速入门指南</h2>
+                            <p>欢迎来到51新炫舞！无论你是舞蹈爱好者还是动作游戏新手，本指南将帮助你快速上手，享受游戏乐趣。</p>
+                            
+                            <h4>1. 角色创建与选择</h4>
+                            <p>进入游戏后，首先需要创建或选择你的角色。51新炫舞提供多种性别和初始发型供玩家选择。建议新手选择外观帅气或可爱的角色，以便在后续的社交互动中更受欢迎。</p>
+                            
+                            <h4>2. 熟悉操作界面</h4>
+                            <p>游戏主界面分为顶部信息栏、中央舞池区、底部操作区。顶部显示当前连击数和得分；中央是音符下落区域；底部是方向键和功能按钮。</p>
+                            
+                            <h4>3. 基础连击技巧</h4>
+                            <ul>
+                                <li><strong>点击：</strong>当音符到达判定线时，直接点击对应方向键。</li>
+                                <li><strong>长按：</strong>对于长条音符，按住方向键不放，直到长条结束。</li>
+                                <li><strong>滑动：</strong>在滑动音符出现时，手指从上至下滑动屏幕。</li>
+                            </ul>
+                            <p>保持连击是获得高分的关键。尽量保证每一次点击都在判定框内，避免错过音符。</p>
+                            
+                            <h4>4. 服装对属性的影响</h4>
+                            <p>在51新炫舞中，服装不仅能改变外观，部分特定套装还会提供属性加成。例如，“极速战靴”可以略微增加移动速度，“幸运光环”有几率触发暴击得分翻倍效果。</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">51新炫舞</a>
+                    <p>51新炫舞致力于为玩家提供最流畅、最有趣的网页舞蹈游戏体验。在这里，每个人都是舞台的焦点。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>关于我们</h4>
+                    <ul>
+                        <li><a href="#">公司简介</a></li>
+                        <li><a href="#">加入我们</a></li>
+                        <li><a href="#">联系方式</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>游戏帮助</h4>
+                    <ul>
+                        <li><a href="#">新手教程</a></li>
+                        <li><a href="#">客服中心</a></li>
+                        <li><a href="#">玩家守则</a></li>
+                        <li><a href="#">社区规范</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>关注我们</h4>
+                    <ul>
+                        <li><a href="#">官方微博</a></li>
+                        <li><a href="#">微信公众号</a></li>
+                        <li><a href="#">官方论坛</a></li>
+                        <li><a href="#">玩家QQ群</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 51新炫舞 版权所有 | 本站内容仅供展示，不代表任何官方立场</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+                                                            </html>
