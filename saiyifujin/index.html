@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="赛义夫近况：全面追踪埃及影星赛义夫·阿里·哈桑的最新影视作品、拍摄动态、个人生活及粉丝活动信息。">
+    <meta name="keywords" content="赛义夫近况, 赛义夫·阿里·哈桑, 埃及电影, 阿拉伯影星, 沙哈拉电影">
+    <title>赛义夫近况-最新影视动态与个人资讯追踪</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #c0392b;
+            --secondary-color: #2c3e50;
+            --accent-color: #f39c12;
+            --bg-light: #f8f9fa;
+            --text-dark: #333;
+            --text-gray: #666;
+            --white: #ffffff;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* 布局容器 */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部导航 */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        .search-btn {
+            background: none;
+            border: 1px solid #ddd;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            color: var(--text-gray);
+        }
+
+        /* Hero 区域 */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://picsum.photos/seed/saif/1920/600.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-bottom: 40px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .cta-btn:hover {
+            background-color: #a93226;
+            transform: translateY(-2px);
+        }
+
+        /* 统计数据栏 */
+        .stats-bar {
+            background-color: var(--white);
+            padding: 30px 0;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .stat-item p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* 主要内容区 */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        /* 文章列表 */
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .article-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .article-img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .article-body {
+            padding: 25px;
+        }
+
+        .article-meta {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-bottom: 10px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .tag {
+            background-color: #ffeaa7;
+            color: #d35400;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .article-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        .article-excerpt {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .read-more {
+            color: var(--primary-color);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* 侧边栏 */
+        aside .widget {
+            background: var(--white);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .widget-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .category-list li {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .category-list a {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            color: var(--text-dark);
+        }
+
+        .category-list a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .count {
+            background-color: #eee;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            color: var(--text-gray);
+        }
+
+        /* 最新动态列表 */
+        .timeline-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .timeline-date {
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .date-day {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            line-height: 1;
+        }
+
+        .date-month {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+        }
+
+        .timeline-content h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        /* 影视作品分类 */
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .movie-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.05);
+            z-index: 2;
+        }
+
+        .movie-poster {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .movie-info {
+            padding: 15px;
+        }
+
+        .movie-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .movie-year {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: var(--secondary-color);
+            color: #bdc3c7;
+            padding: 50px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a:hover {
+            color: var(--white);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 900px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .nav-wrapper {
+                flex-direction: column;
+                height: auto;
+                padding: 15px 0;
+            }
+            nav ul {
+                margin-top: 15px;
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">Arab<span>Cinema</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#news">最新动态</a></li>
+                    <li><a href="#movies">影视作品</a></li>
+                    <li><a href="#about">关于赛义夫</a></li>
+                </ul>
+            </nav>
+            <button class="search-btn">搜索</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content">
+                <h1>赛义夫近况</h1>
+                <p>追踪埃及影星赛义夫·阿里·哈桑的最新拍摄项目、国际电影节亮相以及个人生活动态。</p>
+                <a href="#news" class="cta-btn">查看最新资讯</a>
+            </div>
+        </section>
+
+        <!-- Stats Bar -->
+        <div class="container">
+            <div class="stats-bar">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>42+</h3>
+                        <p>主演电影</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>12</h3>
+                        <p>获奖记录</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>2024</h3>
+                        <p>最新作品</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>Active</h3>
+                        <p>持续活跃中</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="container main-grid" id="news">
+            <!-- News Feed -->
+            <section class="news-feed">
+                <div class="section-title">
+                    <h2>最新资讯</h2>
+                    <a href="#" style="font-size: 0.9rem; color: var(--primary-color);">查看全部 &rarr;</a>
+                </div>
+
+                <article class="article-card">
+                    <img src="https://picsum.photos/seed/saif2/800/450.jpg" alt="赛义夫拍摄现场" class="article-img">
+                    <div class="article-body">
+                        <div class="article-meta">
+                            <span class="tag">影视拍摄</span>
+                            <span>2023年10月24日</span>
+                        </div>
+                        <h3 class="article-title">《沙哈拉之影》新片拍摄进度更新</h3>
+                        <p class="article-excerpt">据悉，赛义夫·阿里·哈桑目前正在埃及红海沿岸进行古装史诗巨制《沙哈拉之影》的最后阶段拍摄。剧组透露，本片将采用最新的实景特效技术，还原古埃及的辉煌文明...</p>
+                        <a href="#" class="read-more">阅读全文</a>
+                    </div>
+                </article>
+
+                <article class="article-card">
+                    <img src="https://picsum.photos/seed/saif3/800/450.jpg" alt="赛义夫出席活动" class="article-img">
+                    <div class="article-body">
+                        <div class="article-meta">
+                            <span class="tag">红毯活动</span>
+                            <span>2023年09月15日</span>
+                        </div>
+                        <h3 class="article-title">威尼斯电影节红毯造型解析</h3>
+                        <p class="article-excerpt">在刚刚结束的威尼斯电影节上，赛义夫以一袭深蓝色丝绒西装亮相，凭借精湛的演技和优雅的举止再次成为全球媒体的焦点。本次他带来的作品展示了他在角色塑造上的突破...</p>
+                        <a href="#" class="read-more">阅读全文</a>
+                    </div>
+                </article>
+
+                <article class="article-card">
+                    <div class="article-body">
+                        <div class="article-meta">
+                            <span class="tag">访谈</span>
+                            <span>2023年08月02日</span>
+                        </div>
+                        <h3 class="article-title">独家专访：关于衰老与演技的思考</h3>
+                        <p class="article-excerpt">在接受当地主流媒体采访时，赛义夫谈到了他对中年演员角色的看法。他表示，现在的观众更欣赏有深度、有故事感的角色，而不是单纯依靠外貌吸引眼球...</p>
+                        <a href="#" class="read-more">阅读全文</a>
+                    </div>
+                </article>
+            </section>
+
+            <!-- Sidebar -->
+            <aside>
+                <div class="widget">
+                    <h3 class="widget-title">关注分类</h3>
+                    <ul class="category-list">
+                        <li><a href="#">电影动态 <span class="count">12</span></a></li>
+                        <li><a href="#">电视剧集 <span class="count">5</span></a></li>
+                        <li><a href="#">个人生活 <span class="count">8</span></a></li>
+                        <li><a href="#">商业投资 <span class="count">3</span></a></li>
+                        <li><a href="#">粉丝见面会 <span class="count">2</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="widget">
+                    <h3 class="widget-title">近期活动时间轴</h3>
+                    <div class="timeline-item">
+                        <div class="timeline-date">
+                            <div class="date-day">24</div>
+                            <div class="date-month">10月</div>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>新片《沙哈拉之影》杀青</h4>
+                            <p>埃及开罗</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">
+                            <div class="date-day">15</div>
+                            <div class="date-month">09月</div>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>出席柏林电影节开幕式</h4>
+                            <p>德国柏林</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">
+                            <div class="date-day">01</div>
+                            <div class="date-month">08月</div>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>慈善晚宴致辞</h4>
+                            <p>开罗</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="widget" style="background-color: #e8f6f3; border: 1px solid #d4efdf;">
+                    <h3 class="widget-title">订阅更新</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 15px;">获取赛义夫的第一手资讯，无垃圾邮件。</p>
+                    <input type="email" placeholder="您的邮箱地址" style="width: 100%; padding: 10px; border: none; border-radius: 4px; margin-bottom: 10px;">
+                    <button class="cta-btn" style="width: 100%; font-size: 0.9rem;">立即订阅</button>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Movies Section -->
+        <section class="container" id="movies">
+            <div class="section-title">
+                <h2>精选影视作品</h2>
+            </div>
+            <div class="movie-grid">
+                <div class="movie-card">
+                    <img src="https://picsum.photos/seed/mov1/300/400.jpg" alt="电影海报" class="movie-poster">
+                    <div class="movie-info">
+                        <h4 class="movie-title">沙哈拉之影</h4>
+                        <span class="movie-year">2024 (即将上映)</span>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://picsum.photos/seed/mov2/300/400.jpg" alt="电影海报" class="movie-poster">
+                    <div class="movie-info">
+                        <h4 class="movie-title">夜幕降临</h4>
+                        <span class="movie-year">2023</span>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://picsum.photos/seed/mov3/300/400.jpg" alt="电影海报" class="movie-poster">
+                    <div class="movie-info">
+                        <h4 class="movie-title">最后的誓言</h4>
+                        <span class="movie-year">2022</span>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://picsum.photos/seed/mov4/300/400.jpg" alt="电影海报" class="movie-poster">
+                    <div class="movie-info">
+                        <h4 class="movie-title">城市之光</h4>
+                        <span class="movie-year">2021</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>关于本站</h4>
+                    <p style="font-size: 0.9rem; line-height: 1.8;">
+                        本站致力于为影迷提供最全面、最及时的赛义夫·阿里·哈桑近况资讯。我们关注他的每一部新作品，记录他的每一次红毯亮相。
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="#">最新电影</a></li>
+                        <li><a href="#">经典回顾</a></li>
+                        <li><a href="#">新闻中心</a></li>
+                        <li><a href="#">联系合作</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>热门话题</h4>
+                    <ul>
+                        <li><a href="#">赛义夫获奖</a></li>
+                        <li><a href="#">家庭生活</a></li>
+                        <li><a href="#">商业帝国</a></li>
+                        <li><a href="#">粉丝活动</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>关注我们</h4>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023-2024 赛义夫近况追踪站. All Rights Reserved. 本站内容仅供资讯参考，非官方网站。</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
