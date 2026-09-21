@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="每日黄金价格查询与行情分析。提供实时金价走势图、国际金价（伦敦金、COMEX）及国内金价（上海金交所）数据，助您把握投资时机。">
+    <meta name="keywords" content="每日黄金,黄金价格,实时金价,金价走势,投资理财,黄金投资">
+    <title>每日黄金-实时金价查询与投资分析指南</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --primary-gold-dark: #B4941F;
+            --bg-dark: #121212;
+            --bg-card: #1E1E1E;
+            --text-main: #FFFFFF;
+            --text-secondary: #AAAAAA;
+            --text-muted: #666666;
+            --accent-green: #00C853;
+            --accent-red: #FF3D00;
+            --border-color: #333333;
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Utility */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .text-gold {
+            color: var(--primary-gold);
+        }
+
+        .text-green {
+            color: var(--accent-green);
+        }
+
+        .text-red {
+            color: var(--accent-red);
+        }
+
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(18, 18, 18, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--primary-gold), #F5E6A3);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-size: 15px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-gold);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+        }
+
+        .btn-outline:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .btn-primary {
+            background: var(--primary-gold);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-gold-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 60px 0;
+            background: radial-gradient(circle at 50% 50%, #2a2a2a 0%, var(--bg-dark) 70%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* Market Ticker */
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            margin-bottom: 40px;
+        }
+
+        .ticker {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            animation: ticker 30s linear infinite;
+        }
+
+        .ticker-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 150px;
+        }
+
+        .ticker-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ticker-value {
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Main Content Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2.5fr 1fr;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        /* Chart Section */
+        .chart-section {
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .time-filters {
+            display: flex;
+            background: #121212;
+            border-radius: 4px;
+            padding: 2px;
+        }
+
+        .time-filter {
+            padding: 5px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
+
+        .time-filter.active {
+            background-color: var(--border-color);
+            color: var(--text-main);
+        }
+
+        .chart-container {
+            height: 350px;
+            position: relative;
+            background: linear-gradient(to bottom, rgba(212, 175, 55, 0.02), transparent);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 0 10px 10px 10px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background-color: var(--primary-gold);
+            opacity: 0.8;
+            margin: 0 2px;
+            border-radius: 2px 2px 0 0;
+            position: relative;
+            transition: height 0.5s ease;
+        }
+
+        .chart-bar:hover {
+            opacity: 1;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Analysis Cards */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .analysis-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .analysis-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-gold);
+        }
+
+        .card-img {
+            height: 160px;
+            background-color: #2a2a2a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .analysis-card:hover .card-img img {
+            opacity: 0.9;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 4px 8px;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .card-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Sidebar */
+        aside {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .sidebar-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .rank-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .rank-list li:last-child {
+            border-bottom: none;
+        }
+
+        .rank-num {
+            width: 24px;
+            height: 24px;
+            background-color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .rank-num.top-1 { background-color: var(--primary-gold); color: #000; }
+        .rank-num.top-2 { background-color: #C0C0C0; color: #000; }
+        .rank-num.top-3 { background-color: #CD7F32; color: #000; }
+
+        .rank-info {
+            flex: 1;
+        }
+
+        .rank-name {
+            font-size: 14px;
+            display: block;
+        }
+
+        .rank-change {
+            font-size: 12px;
+        }
+
+        .action-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .action-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: rgba(255,255,255,0.03);
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .action-btn:hover {
+            background-color: rgba(255,255,255,0.08);
+        }
+
+        /* Guide Section */
+        .guide-section {
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 60px;
+            border: 1px solid var(--border-color);
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .guide-item {
+            text-align: center;
+        }
+
+        .guide-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-gold);
+        }
+
+        .guide-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .guide-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* FAQ */
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 15px 20px;
+            background-color: var(--bg-card);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .faq-question:hover {
+            background-color: #252525;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background-color: #181818;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 15px 20px;
+            max-height: 200px;
+        }
+
+        .faq-item.active .faq-question {
+            color: var(--primary-gold);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            padding: 60px 0 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            font-size: 20px;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+        }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            color: var(--text-main);
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-gold);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #222;
+            color: #555;
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            .guide-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-wrapper {
+                flex-direction: column;
+                height: auto;
+                padding: 15px 0;
+                gap: 15px;
+            }
+            nav ul {
+                gap: 15px;
+                font-size: 13px;
+            }
+            .hero h1 {
+                font-size: 28px;
+            }
+            .ticker {
+                flex-wrap: wrap;
+                animation: none;
+                gap: 20px;
+            }
+            .guide-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-brand p {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <div class="logo-icon"></div>
+                每日黄金
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">实时行情</a></li>
+                    <li><a href="#">投资指南</a></li>
+                    <li><a href="#">金店报价</a></li>
+                    <li><a href="#">关于我们</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#" class="btn btn-outline">登录</a>
+                <a href="#" class="btn btn-primary">订阅提醒</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>掌握每日黄金动态</h1>
+            <p>提供权威、实时的金价数据与深度市场分析，助您在波动中把握投资先机。</p>
+            <div class="flex-center" style="gap: 15px;">
+                <a href="#" class="btn btn-primary">查看今日报价</a>
+                <a href="#" class="btn btn-outline">下载投资APP</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker-item">
+                <span class="ticker-label">伦敦金</span>
+                <span class="ticker-value text-gold">2,345.50</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-label">上海金</span>
+                <span class="ticker-value text-gold">548.20</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-label">COMEX金</span>
+                <span class="ticker-value text-gold">2,348.10</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-label">人民币汇率</span>
+                <span class="ticker-value text-red">7.29</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-label">伦敦金</span>
+                <span class="ticker-value text-gold">2,345.50</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-label">上海金</span>
+                <span class="ticker-value text-gold">548.20</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-label">COMEX金</span>
+                <span class="ticker-value text-gold">2,348.10</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-label">人民币汇率</span>
+                <span class="ticker-value text-red">7.29</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="main-grid">
+            <section class="chart-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M0 0h1v15h15v1H0V0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5z"/></svg>
+                        实时走势分析
+                    </h2>
+                    <div class="time-filters">
+                        <span class="time-filter">日K</span>
+                        <span class="time-filter active">周K</span>
+                        <span class="time-filter">月K</span>
+                        <span class="time-filter">年K</span>
+                    </div>
+                </div>
+                <div class="chart-container" id="goldChart">
+                    <!-- Bars generated by JS -->
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 12px; color: #666;">
+                    <span>周一</span><span>周二</span><span>周三</span><span>周四</span><span>周五</span><span>周六</span><span>周日</span>
+                </div>
+            </section>
+
+            <aside>
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">热门金种排行</h3>
+                    <ul class="rank-list">
+                        <li>
+                            <div class="rank-info">
+                                <span class="rank-name text-gold">AU99.99</span>
+                                <span class="rank-change text-green">+0.35%</span>
+                            </div>
+                            <span class="rank-num top-1">1</span>
+                        </li>
+                        <li>
+                            <div class="rank-info">
+                                <span class="rank-name">T+D</span>
+                                <span class="rank-change text-green">+0.12%</span>
+                            </div>
+                            <span class="rank-num top-2">2</span>
+                        </li>
+                        <li>
+                            <div class="rank-info">
+                                <span class="rank-name">国际金价</span>
+                                <span class="rank-change text-red">-0.05%</span>
+                            </div>
+                            <span class="rank-num top-3">3</span>
+                        </li>
+                        <li>
+                            <div class="rank-info">
+                                <span class="rank-name">首饰金</span>
+                                <span class="rank-change text-green">+0.00%</span>
+                            </div>
+                            <span class="rank-num">4</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">快速操作</h3>
+                    <div class="action-list">
+                        <a href="#" class="action-btn">
+                            <span>金价计算器</span>
+                            <span>→</span>
+                        </a>
+                        <a href="#" class="action-btn">
+                            <span>实物回收报价</span>
+                            <span>→</span>
+                        </a>
+                        <a href="#" class="action-btn">
+                            <span>银行积存金</span>
+                            <span>→</span>
+                        </a>
+                        <a href="#" class="action-btn">
+                            <span>投资策略研报</span>
+                            <span>→</span>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <section class="guide-section">
+            <h2 class="section-title" style="justify-content: center; margin-bottom: 40px;">投资黄金必知指南</h2>
+            <div class="guide-grid">
+                <div class="guide-item">
+                    <div class="guide-icon">💰</div>
+                    <h3 class="guide-title">什么是黄金投资</h3>
+                    <p class="guide-text">了解实物黄金、纸黄金、黄金ETF及黄金期货的区别与投资门槛。</p>
+                </div>
+                <div class="guide-item">
+                    <div class="guide-icon">📈</div>
+                    <h3 class="guide-title">如何分析走势</h3>
+                    <p class="guide-text">掌握基本面分析（美元、通胀）与技术面分析（K线、均线）技巧。</p>
+                </div>
+                <div class="guide-item">
+                    <div class="guide-icon">⚠️</div>
+                    <h3 class="guide-title">风险与注意事项</h3>
+                    <p class="guide-text">黄金价格受多重因素影响，了解杠杆风险及市场波动性。</p>
+                </div>
+                <div class="guide-item">
+                    <div class="guide-icon">🏆</div>
+                    <h3 class="guide-title">常见误区澄清</h3>
+                    <p class="guide-text">辟谣“乱世买金”的绝对性，理性看待长期持有与短期交易。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="analysis-section">
+            <div class="section-header">
+                <h2 class="section-title">今日市场深度解析</h2>
+                <a href="#" class="btn btn-outline" style="font-size: 12px; padding: 5px 15px;">查看更多</a>
+            </div>
+            <div class="analysis-grid">
+                <article class="analysis-card">
+                    <div class="card-img">
+                        <span class="card-badge">重磅</span>
+                        <img src="https://picsum.photos/seed/gold1/400/250" alt="黄金市场分析">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title"><a href="#">美联储降息预期升温，金价有望突破2400美元大关</a></h3>
+                        <p class="card-desc">随着通胀数据回落，市场对美联储降息的预期显著增强，避险情绪推动黄金价格持续走高...</p>
+                        <div class="card-footer">
+                            <span>2023-10-25</span>
+                            <span>阅读 1.2w</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="analysis-card">
+                    <div class="card-img">
+                        <img src="https://picsum.photos/seed/gold2/400/250" alt="实物黄金">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title"><a href="#">实物黄金购买全攻略：品牌、成色与渠道选择</a></h3>
+                        <p class="card-desc">面对琳琅满目的金饰品牌，消费者该如何选择？本篇指南为您详细解析各大品牌工艺与手续费差异。</p>
+                        <div class="card-footer">
+                            <span>2023-10-24</span>
+                            <span>阅读 8.5k</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="analysis-card">
+                    <div class="card-img">
+                        <img src="https://picsum.photos/seed/gold3/400/250" alt="投资策略">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title"><a href="#">周线级别调整结束？技术面显示反弹信号</a></h3>
+                        <p class="card-desc">资深分析师指出，当前金价在关键支撑位获得企稳，若成交量配合，短期多头有望反攻。</p>
+                        <div class="card-footer">
+                            <span>2023-10-24</span>
+                            <span>阅读 6.3k</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="analysis-card">
+                    <div class="card-img">
+                        <img src="https://picsum.photos/seed/gold4/400/250" alt="历史数据">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title"><a href="#">近十年黄金价格走势回顾与未来展望</a></h3>
+                        <p class="card-desc">通过历史数据复盘，我们发现黄金在极端经济环境下往往表现出色，长期配置价值凸显。</p>
+                        <div class="card-footer">
+                            <span>2023-10-23</span>
+                            <span>阅读 4.1k</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 40px;">常见问题 (FAQ)</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">今日金价是多少？如何查询？ <span>+</span></div>
+                <div class="faq-answer">
+                    您可以在本站首页“实时行情”板块查看最新金价，我们提供伦敦金、上海金及各大银行金条报价。同时支持订阅推送，第一时间获取价格变动通知。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">黄金投资和储蓄哪个更划算？ <span>+</span></div>
+                <div class="faq-answer">
+                    这取决于您的风险偏好和资金规划。储蓄利率较低且存在通胀风险，而黄金具有抗通胀和避险属性，但价格波动较大。建议根据资产配置比例进行选择。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">国际金价和国内金价有什么区别？ <span>+</span></div>
+                <div class="faq-answer">
+                    国际金价（如伦敦金）以美元计价，受全球市场影响；国内金价（如上海金）以人民币计价，受汇率及国内供需影响。两者之间存在汇率换算关系。
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>每日黄金</h3>
+                    <p>专注为投资者提供最及时、最专业的黄金市场数据与分析服务。让每一次投资决策都有据可依。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>行情数据</h4>
+                    <ul>
+                        <li><a href="#">国际现货金</a></li>
+                        <li><a href="#">国内现货金</a></li>
+                        <li><a href="#">黄金T+D</a></li>
+                        <li><a href="#">白银价格</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>投资服务</h4>
+                    <ul>
+                        <li><a href="#">黄金计算器</a></li>
+                        <li><a href="#">回收估价</a></li>
+                        <li><a href="#">金店查询</a></li>
+                        <li><a href="#">理财资讯</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>关于我们</h4>
+                    <ul>
+                        <li><a href="#">网站介绍</a></li>
+                        <li><a href="#">联系方式</a></li>
+                        <li><a href="#">免责声明</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 每日黄金网 版权所有 | 本站数据仅供参考，不构成投资建议
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Generate Chart Bars
+        const chartContainer = document.getElementById('goldChart');
+        const dataPoints = [
+            2320, 2335, 2320, 2350, 2340, 2360, 2345, 2365, 2380, 2375, 
+            2360, 2380, 2395, 2390, 2380, 2395, 2410, 2400, 2420, 2415,
+            2430, 2420, 2435, 2440, 2430, 2445, 2450, 2440, 2455, 2445
+        ];
+
+        // Find max and min for scaling
+        const maxVal = Math.max(...dataPoints);
+        const minVal = Math.min(...dataPoints);
+        const range = maxVal - minVal;
+
+        dataPoints.forEach((val, index) => {
+            const bar = document.createElement('div');
+            bar.className = 'chart-bar';
+            
+            // Calculate height percentage (padding bottom for labels)
+            // Normalize value between 0 and 1, then map to 10% to 90% height
+            const normalized = (val - minVal) / range;
+            const height = Math.max(10, Math.min(90, normalized * 100)); 
+            
+            bar.style.height = `${height}%`;
+            
+            // Color based on trend (simplified logic)
+            if (index > 0) {
+                if (val > dataPoints[index - 1]) {
+                    bar.style.backgroundColor = 'var(--primary-gold)';
+                } else {
+                    bar.style.backgroundColor = '#555'; // Dimmer for down days
+                }
+            }
+
+            chartContainer.appendChild(bar);
+        });
+
+        // FAQ Toggle Logic
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', () => {
+                // Close others
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) otherItem.classList.remove('active');
+                });
+                // Toggle current
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+                          </html>
